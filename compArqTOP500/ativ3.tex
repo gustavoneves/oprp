@@ -1,0 +1,69 @@
+\documentclass[11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%Comparação de arquiteturas do TOP500
+
+%Elabore uma tabela comparativa entre 2 equipamentos da lista atualizada do TOP500.
+
+%Identifique:
+
+%   - Arquitetura (classificação Flynn e memória). Estude e classifique CPU e GPU (se necessário).
+
+%   - Arquitetura de rede. Fabricante e capacidade.
+
+%   - Sistema operational
+
+%   - Posição no TOP500
+
+%   - Consumo energético
+
+    
+\title{Comparação de arquiteturas do TOP500 - OPRP}
+    
+\author{Alunos: \textbf{Ariel Agne da Silveira}\\ \qquad \qquad\textbf{Gustavo José Neves da Silva}}{
+
+
+\begin{document}
+    
+    \date{}
+    
+    \maketitle
+% 1 lugar top 500 => https://www.top500.org/system/179397
+%       https://www.olcf.ornl.gov/summit/
+%       https://www.olcf.ornl.gov/wp-content/uploads/2018/06/Summit_bythenumbers_FIN-1.pdf
+
+% 1 lugar green500; 469 top 500 => https://www.top500.org/system/179166
+%       https://www.nextplatform.com/2019/06/18/inside-nvidias-dgx-superpod-cluster/
+
+%\begin{center}
+%    \textbf{Ariel Agne da Silveira} \\
+%    \textbf{Gustavo José Neves da Silva}
+%\end{center}
+            \begin{table}[h]
+               \scriptsize
+               \begin{tabular}{ r | c | c}
+                  \hline
+                    & Summit & DGX SaturnV Volta \\ \hline
+                    \multicolumn{1}{l|}{Fabricante} & IBM & Nvidia\\ \hline \hline
+                    \multicolumn{3}{l}{Arquitetura}\\ \hline
+                    Flynn & MIMD & MIMD\\ \hline
+                    Memória & 2.801.664 GB & 16.896 GB\\ \hline
+                    CPU & IBM POWER9 22C 3.07GHz & Xeon E5-2698v4 20C 2.2GHz\\ \hline
+                    N$^\circ$ cores & 2.414.592 & 22.440\\ \hline
+                    GPU & NVIDIA Volta GV100 & NVIDIA Tesla V100\\ \hline\hline
+
+                    \multicolumn{3}{l}{Arquitetura de rede}\\ \hline
+                    Fabricante & Dual-rail Mellanox EDR Infiniband & Infiniband EDR\\ \hline
+                    Capacidade & 100Gb & 100 Gb\\ \hline\hline
+
+                    \multicolumn{1}{l|}{Sistema operational} & RHEL 7.4 & Ubuntu Linux \\ \hline\hline
+
+                    \multicolumn{1}{l|}{Posição no TOP500} & 1 & 469\\ \hline\hline
+
+                    \multicolumn{1}{l|}{Consumo energético} & 10,096.00 kW & 97.00 kW\\ \hline\hline     
+               \end{tabular}
+           \end{table}
+
+\end{document}

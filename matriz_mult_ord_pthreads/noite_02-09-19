@@ -1,0 +1,158 @@
+library("dplyr")
+library("ggplot2")
+arq500 <- read.table("500.dat", stringsAsFactors=F)
+arq750 <- read.table("750.dat", stringsAsFactors=F)
+arq1000 <- read.table("1000.dat", stringsAsFactors=F)
+arq1500 <- read.table("1500.dat", stringsAsFactors=F)
+arq1750 <- read.table("1750.dat", stringsAsFactors=F)
+arq2000 <- read.table("2000.dat", stringsAsFactors=F)
+colnames(arq500) <- c("n_threads", "tempo")
+colnames(arq750) <- c("n_threads", "tempo")
+colnames(arq1000) <- c("n_threads", "tempo")
+colnames(arq1500) <- c("n_threads", "tempo")
+colnames(arq1750) <- c("n_threads", "tempo")
+colnames(arq2000) <- c("n_threads", "tempo")
+tab500 <- as.data.frame(arq500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab750 <- as.data.frame(arq750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1000 <- as.data.frame(arq1000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1500 <- as.data.frame(arq1500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1750 <- as.data.frame(arq1750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab2000 <- as.data.frame(arq2000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab500 <- cbind(tab500, speedup=0, tam="500x500")
+tab750 <- cbind(tab750, speedup=0, tam="750x750")
+tab1000 <- cbind(tab1000, speedup=0, tam="1000x1000")
+tab1500 <- cbind(tab1500, speedup=0, tam="1500x1500")
+tab1750 <- cbind(tab1750, speedup=0, tam="1750x1750")
+tab2000 <- cbind(tab2000, speedup=0, tam="2000x2000")
+tab500$speedup <- round(tab500$media / tab500$media[1], digits=2)
+tab750$speedup <- round(tab750$media / tab750$media[1], digits=2)
+tab1000$speedup <- round(tab1000$media / tab1000$media[1], digits=2)
+tab1500$speedup <- round(tab1500$media / tab1500$media[1], digits=2)
+tab1750$speedup <- round(tab1750$media / tab1750$media[1], digits=2)
+tab2000$speedup <- round(tab2000$media / tab2000$media[1], digits=2)
+tab500
+tabelas <- data.frame(n_threads=c(1,2,3,4,6,8), media=0, speedup=c(1,2,3,4,6,8), tam="Ideal")
+tabelas <- rbind(tabelas, tab500, tab750, tab1000, tab1500, tab1750, tab2000)
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes", labels=c("500x500", "750x750", "1000x1000", "1250x1250", "1500x1500", "1750x1750", "2000x2000")) + ggtitle("Multiplicação de Matrizes - Ariel; Gustavo Neves") + theme(panel.grid.major=element_line(colour="black", linetype="dashed"), panel.grid.minor=element_line(colour="black", linetype="dashed"))
+library("plotly")
+ggplotly(grafico)
+tabelas <- data.frame(n_threads=c(2,3,4,6,8), media=0, speedup=c(1,2,3,4,6,8), tam="Ideal")
+tabelas <- data.frame(n_threads=c(1,2,3,4,6,8), media=0, speedup=c(1,2,3,4,6,8), tam="Ideal")
+tabelas
+tabelas <- rbind(tabelas, tab500, tab750, tab1000, tab1500, tab1750, tab2000)
+tabelas
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes", labels=c("500x500", "750x750", "1000x1000", "1250x1250", "1500x1500", "1750x1750", "2000x2000")) + ggtitle("Multiplicação de Matrizes - Ariel; Gustavo Neves") + theme(panel.grid.major=element_line(colour="black", linetype="dashed"), panel.grid.minor=element_line(colour="black", linetype="dashed"))
+grafico
+tabela500
+tab500
+tab500[1,3] <- 0
+tab750[1,3] <- 0
+tab1000[1,3] <- 0
+tab1500[1,3] <- 0
+tab1750[1,3] <- 0
+tab2000[1,3] <- 0
+tabelas <- data.frame(n_threads=c(1,2,3,4,6,8), media=0, speedup=c(1,2,3,4,6,8), tam="Ideal")
+tabelas <- rbind(tabelas, tab500, tab750, tab1000, tab1500, tab1750, tab2000)
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes", labels=c("500x500", "750x750", "1000x1000", "1250x1250", "1500x1500", "1750x1750", "2000x2000")) + ggtitle("Multiplicação de Matrizes - Ariel; Gustavo Neves") + theme(panel.grid.major=element_line(colour="black", linetype="dashed"), panel.grid.minor=element_line(colour="black", linetype="dashed"))
+grafico
+ggplotly(grafico)
+tabelas <- data.frame(n_threads=c(1,2,3,4,6,8), media=0, speedup=c(1,2,3,4,6,8), tam="Ideal")
+tabelas
+tab500
+tabelas
+tabelas
+tabelas[1,]
+tabelas[1,] <- NULL
+tabelas[1,] <- NA
+tabelas
+tabelas <- data.frame(n_threads=c(1,2,3,4,6,8), media=0, speedup=c(1,2,3,4,6,8), tam="Ideal")
+tabelas[1,] <- NULL
+tabelas
+tabelas[2..6,]
+tabelas[2:6,]
+tabelas <- tabelas[2:6,]
+tabelas
+tab500
+tab500 <- tab500[2:6,]
+tab750 <- tab750[2:6,]
+tab1000 <- tab1000[2:6,]
+tab1250 <- tab1250[2:6,]
+tab1500 <- tab1500[2:6,]
+tab1750 <- tab1750[2:6,]
+tab2000 <- tab2000[2:6,]
+tabelas <- rbind(tabelas, tab500, tab750, tab1000, tab1500, tab1750, tab2000)
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes", labels=c("500x500", "750x750", "1000x1000", "1250x1250", "1500x1500", "1750x1750", "2000x2000")) + ggtitle("Multiplicação de Matrizes - Ariel; Gustavo Neves") + theme(panel.grid.major=element_line(colour="black", linetype="dashed"), panel.grid.minor=element_line(colour="black", linetype="dashed"))
+grafico
+tab500 <- as.data.frame(arq500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab750 <- as.data.frame(arq750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1000 <- as.data.frame(arq1000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1500 <- as.data.frame(arq1500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1750 <- as.data.frame(arq1750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab2000 <- as.data.frame(arq2000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab500
+tab500[,2]
+tab500[,2] - tab500[1,2]
+tab500
+(tab500[1,2] - tab500[,2]) / tab500[,2]
+(tab500[1,2] - tab500[,2]) / tab500[1,2]
+(tab500[1,2] - tab500[,2])
+(tab500[1,2] - tab500[,2]) / tab500[,2]
+(tab500[1,2] - tab500[,2]) / tab500[1,2]
+library("dplyr")
+library("ggplot2")
+arq500 <- read.table("500.dat", stringsAsFactors=F)
+arq750 <- read.table("750.dat", stringsAsFactors=F)
+arq1000 <- read.table("1000.dat", stringsAsFactors=F)
+arq1500 <- read.table("1500.dat", stringsAsFactors=F)
+arq1750 <- read.table("1750.dat", stringsAsFactors=F)
+arq2000 <- read.table("2000.dat", stringsAsFactors=F)
+colnames(arq500) <- c("n_threads", "tempo")
+colnames(arq750) <- c("n_threads", "tempo")
+colnames(arq1000) <- c("n_threads", "tempo")
+colnames(arq1500) <- c("n_threads", "tempo")
+colnames(arq1750) <- c("n_threads", "tempo")
+colnames(arq2000) <- c("n_threads", "tempo")
+tab500 <- as.data.frame(arq500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab750 <- as.data.frame(arq750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1000 <- as.data.frame(arq1000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1500 <- as.data.frame(arq1500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1750 <- as.data.frame(arq1750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab2000 <- as.data.frame(arq2000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab500 <- cbind(tab500, speedup=0, tam="500x500")
+tab750 <- cbind(tab750, speedup=0, tam="750x750")
+tab1000 <- cbind(tab1000, speedup=0, tam="1000x1000")
+tab1500 <- cbind(tab1500, speedup=0, tam="1500x1500")
+tab1750 <- cbind(tab1750, speedup=0, tam="1750x1750")
+tab2000 <- cbind(tab2000, speedup=0, tam="2000x2000")
+tab500$speedup <- (tab500[1,2] - tab500[,2]) / tab500[1,2]
+tab750$speedup <- (tab750[1,2] - tab750[,2]) / tab750[1,2]
+tab1000$speedup <- (tab1000[1,2] - tab1000[,2]) / tab1000[1,2]
+tab1500$speedup <- (tab1500[1,2] - tab1500[,2]) / tab1500[1,2]
+tab2000$speedup <- (tab2000[1,2] - tab2000[,2]) / tab2000[1,2]
+tab500
+tabelas <- data.frame(n_threads=c(1,2,3,4,6,8), media=0, speedup=c(1,2,3,4,6,8), tam="Ideal")
+tabelas <- rbind(tabelas, tab500, tab750, tab1000, tab1500, tab1750, tab2000)
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes", labels=c("500x500", "750x750", "1000x1000", "1250x1250", "1500x1500", "1750x1750", "2000x2000")) + ggtitle("Multiplicação de Matrizes - Ariel; Gustavo Neves") + theme(panel.grid.major=element_line(colour="black", linetype="dashed"), panel.grid.minor=element_line(colour="black", linetype="dashed"))
+grafico
+tabelas
+tab1750$speedup <- (tab1750[1,2] - tab1750[,2]) / tab1750[1,2]
+tabelas <- data.frame(n_threads=c(1,2,3,4,6,8), media=0, speedup=c(1,2,3,4,6,8), tam="Ideal")
+tab500$speedup <- (tab500[1,2] - tab500[,2]) / tab500[1,2]
+tab750$speedup <- (tab750[1,2] - tab750[,2]) / tab750[1,2]
+tab1000$speedup <- (tab1000[1,2] - tab1000[,2]) / tab1000[1,2]
+tab1500$speedup <- (tab1500[1,2] - tab1500[,2]) / tab1500[1,2]
+tab1750$speedup <- (tab1750[1,2] - tab1750[,2]) / tab1750[1,2]
+tab2000$speedup <- (tab2000[1,2] - tab2000[,2]) / tab2000[1,2]
+tabelas <- rbind(tabelas, tab500, tab750, tab1000, tab1500, tab1750, tab2000)
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes", labels=c("500x500", "750x750", "1000x1000", "1250x1250", "1500x1500", "1750x1750", "2000x2000")) + ggtitle("Multiplicação de Matrizes - Ariel; Gustavo Neves") + theme(panel.grid.major=element_line(colour="black", linetype="dashed"), panel.grid.minor=element_line(colour="black", linetype="dashed"))
+grafico
+tabelas
+tabelas <- data.frame(n_threads=c(1,2,3,4,6,8), media=0, speedup=c(0,2,3,4,6,8), tam="Ideal")
+tabelas <- rbind(tabelas, tab500, tab750, tab1000, tab1500, tab1750, tab2000)
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes", labels=c("500x500", "750x750", "1000x1000", "1250x1250", "1500x1500", "1750x1750", "2000x2000")) + ggtitle("Multiplicação de Matrizes - Ariel; Gustavo Neves") + theme(panel.grid.major=element_line(colour="black", linetype="dashed"), panel.grid.minor=element_line(colour="black", linetype="dashed"))
+grafico
+ggplotly(grafico)
+pdf(file="graficoOPRP_corrigido.pdf", paper='A4r')
+plot(grafico)
+dev.off()
+savehistory("noite_02-09-19")

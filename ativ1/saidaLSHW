@@ -1,0 +1,30 @@
+  *-network
+       description: Wireless interface
+       product: AR9485 Wireless Network Adapter
+       vendor: Qualcomm Atheros
+       physical id: 0
+       bus info: pci@0000:01:00.0
+       logical name: wlp1s0
+       version: 01
+       serial: 48:5a:b6:ed:e5:8b
+       width: 64 bits
+       clock: 33MHz
+       capabilities: pm msi pciexpress bus_master cap_list rom ethernet physical wireless
+       configuration: broadcast=yes driver=ath9k driverversion=5.2.5-arch1-1-ARCH firmware=N/A latency=0 link=no multicast=yes wireless=IEEE 802.11
+       resources: irq:38 memory:fea00000-fea7ffff memory:fea80000-fea8ffff
+  *-network
+       description: Ethernet interface
+       product: RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller
+       vendor: Realtek Semiconductor Co., Ltd.
+       physical id: 0
+       bus info: pci@0000:02:00.0
+       logical name: enp2s0
+       version: 10
+       serial: e0:3f:49:f0:0b:a6
+       size: 100Mbit/s
+       capacity: 1Gbit/s
+       width: 64 bits
+       clock: 33MHz
+       capabilities: pm msi pciexpress msix vpd bus_master cap_list ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=r8169 duplex=full firmware=rtl8168g-3_0.0.1 04/23/13 ip=192.168.5.42 latency=0 link=yes multicast=yes port=MII speed=100Mbit/s
+       resources: irq:35 ioport:e000(size=256) memory:fe904000-fe904fff memory:fe900000-fe903fff

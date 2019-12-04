@@ -1,0 +1,55 @@
+\documentclass[10pt]{article}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+
+%Qual a diferença entre as Leis de Amdahl e Gustafson?
+    
+\title{Diferença entre as Leis de Amdahl e Gustafson\\OPRP}
+    
+\author{Aluno: \textbf{Gustavo José Neves da Silva}}{
+
+
+\begin{document}
+    
+    \date{}
+    
+    \maketitle
+    
+    \section*{Lei de Amdahl}
+    
+    \begin{align*}
+    	\text{Aceleração}&=\frac{(s + p)}{(s + p/n)} \\
+    					 &=\frac{1}{(s+p/n)}    	
+    \end{align*}
+    
+    Tal que:
+    \begin{align*}
+    	n &= \text{número de processadores} \\
+    	p &= \text{quantia de tempo gasta em partes paralelizáveis} \\
+    	s &= \text{quantia de tempo gasta na parte sequencial} \\
+    	s+p &= 1, \text{porque é o total de tempo necessário para executar o código}
+    \end{align*}
+
+	Considera que o tamanho do problema é fixo independentemente do número de processadores disponíveis.
+    
+    \section*{Lei de Gustafson}
+    
+    \begin{align*}
+    	\text{Aceleração escalável}&=\frac{(s + p \times N)}{(s + p)} \\
+    					 &= s + p \times N \\
+    					 &= N + (1 - N) \times s    	
+    \end{align*}
+    
+    Tal que:
+    \begin{align*}
+    	N &= \text{número de processadores} \\
+    	p &= \text{quantia de tempo gasta em partes paralelizáveis} \\
+    	s &= \text{quantia de tempo gasta na parte sequencial}
+    \end{align*}
+
+	Considera que o tamanho do problema escala em conjunto com o número de processadores disponíveis. 
+    
+
+\end{document}

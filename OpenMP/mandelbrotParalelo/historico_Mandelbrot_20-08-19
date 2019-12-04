@@ -1,0 +1,43 @@
+rOriginal <- read.table("resultadoOriginal")
+rOriginal
+rOriginal[1]
+rOriginal[1] <- NULL
+rOriginal
+rSemOpenMP <- read.table("resultadoSemOpenMP")
+rComOpenMP <- read.table("resultadoComOpenMP")
+rSemOpenMP[1] <- NULL
+rCommOpenMP[1] <- NULL
+rComOpenMP[1] <- NULL
+mean(rOriginal)
+rOriginal
+rOriginal$V2
+mean(rOriginal$V2)
+mean(rOriginal$V2)
+mean(rComOpenMP$V2)
+mean(rSemOpenMP$V2)
+plot(rOriginal$V2)
+lines(rOriginal$V2)
+lines(rComOpenMP$V2)
+lines(rComOpenMP$V2)
+plot(rOriginal$V2, type="l", col="black")
+plot(rOriginal$V2, type="o", col="black")
+lines(rComOpenMP$v2, type="o", col="blue")
+plot(rOriginal$V2, type="o", col="black")
+plot(rOriginal$V2, type="o", col="black", lines(rComOpenMP$v2, type="o", col="blue"))
+plot(rOriginal$V2, type="o", col="black")
+lines(rComOpenMP$v2, col="blue")
+lines(rComOpenMP$V2, col="blue")
+plot(rComOpenMP$V2, col="blue")
+plot(rComOpenMP$V2, type="o", col="blue")
+plot(rOriginal$V2, type="o", col="black")
+dev.new()
+plot(rComOpenMP$V2, type="o", col="blue")
+dev.new()
+plot(rSemmOpenMP$V2, type="o", col="red")
+plot(rSemOpenMP$V2, type="o", col="red")
+testeS <- read.table("testeS")
+testeS[1] <- NULL
+testeS
+mean(testeS$V2)
+mean(rOriginal$V2)
+savehistory("historico_Mandelbrot_20-08-19")

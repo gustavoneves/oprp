@@ -1,0 +1,213 @@
+library("dplyr")
+library("ggplot2")
+arq500 <- read.table("500.dat", stringsAsFactors=F)
+arq750 <- read.table("750.dat", stringsAsFactors=F)
+arq1000 <- read.table("1000.dat", stringsAsFactors=F)
+arq1500 <- read.table("1500.dat", stringsAsFactors=F)
+arq1750 <- read.table("1750.dat", stringsAsFactors=F)
+arq2000 <- read.table("2000.dat", stringsAsFactors=F)
+colnames(arq500) <- c("n_threads", "tempo")
+colnames(arq750) <- c("n_threads", "tempo")
+colnames(arq1000) <- c("n_threads", "tempo")
+colnames(arq1500) <- c("n_threads", "tempo")
+colnames(arq1750) <- c("n_threads", "tempo")
+colnames(arq2000) <- c("n_threads", "tempo")
+tab500 <- as.data.frame(arq500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab750 <- as.data.frame(arq750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1000 <- as.data.frame(arq1000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1500 <- as.data.frame(arq1500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1750 <- as.data.frame(arq1750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab2000 <- as.data.frame(arq2000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab500 <- cbind(tab500, speedup=0)
+tab750 <- cbind(tab750, speedup=0)
+tab1000 <- cbind(tab1000, speedup=0)
+tab1500 <- cbind(tab1500, speedup=0)
+tab1750 <- cbind(tab1750, speedup=0)
+tab2000 <- cbind(tab2000, speedup=0)
+tab500$speedup <- round((tab500$media / tab500$media[1]) * 10, digits=2)
+tab750$speedup <- round((tab750$media / tab750$media[1]) * 10, digits=2)
+tab1000$speedup <- round((tab1000$media / tab1000$media[1]) * 10, digits=2)
+tab1500$speedup <- round((tab1500$media / tab1500$media[1]) * 10, digits=2)
+tab1750$speedup <- round((tab1750$media / tab1750$media[1]) * 10, digits=2)
+tab2000$speedup <- round((tab2000$media / tab2000$media[1]) * 10, digits=2)
+ggplot(data=tab500[2:nrow(tab500),]) + geom_line(aes(n_threads, speedup)) + geom_point(aes(n_threads, speedup, fill='500x500')) + scale_fill_manual(name="tamanho", values=c('red'))
+arq500 <- read.table("500.dat", stringsAsFactors=F)
+arq750 <- read.table("750.dat", stringsAsFactors=F)
+arq1000 <- read.table("1000.dat", stringsAsFactors=F)
+arq1500 <- read.table("1500.dat", stringsAsFactors=F)
+arq1750 <- read.table("1750.dat", stringsAsFactors=F)
+arq2000 <- read.table("2000.dat", stringsAsFactors=F)
+colnames(arq500) <- c("n_threads", "tempo")
+colnames(arq750) <- c("n_threads", "tempo")
+colnames(arq1000) <- c("n_threads", "tempo")
+colnames(arq1500) <- c("n_threads", "tempo")
+colnames(arq1750) <- c("n_threads", "tempo")
+colnames(arq2000) <- c("n_threads", "tempo")
+tab500 <- as.data.frame(arq500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab750 <- as.data.frame(arq750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1000 <- as.data.frame(arq1000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1500 <- as.data.frame(arq1500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1750 <- as.data.frame(arq1750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab2000 <- as.data.frame(arq2000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab500 <- cbind(tab500, speedup=0, tam="tab500")
+tab750 <- cbind(tab750, speedup=0, tam="tab750")
+tab1000 <- cbind(tab1000, speedup=0, tam="tab1000")
+tab1500 <- cbind(tab1500, speedup=0, tam="tab1500")
+tab1750 <- cbind(tab1750, speedup=0, tam="tab1750")
+tab2000 <- cbind(tab2000, speedup=0, tam="tab2000")
+tab500$speedup <- round((tab500$media / tab500$media[1]) * 10, digits=2)
+tab750$speedup <- round((tab750$media / tab750$media[1]) * 10, digits=2)
+tab1000$speedup <- round((tab1000$media / tab1000$media[1]) * 10, digits=2)
+tab1500$speedup <- round((tab1500$media / tab1500$media[1]) * 10, digits=2)
+tab1750$speedup <- round((tab1750$media / tab1750$media[1]) * 10, digits=2)
+tab2000$speedup <- round((tab2000$media / tab2000$media[1]) * 10, digits=2)
+tab500
+ggplot(data=tab500[2:nrow(tab500),], colour=tam) + geom_line(aes(n_threads, speedup)) + geom_point(aes(n_threads, speedup, fill='500x500'))
+ggplot(data=tab500[2:nrow(tab500),], color='red') + geom_line(aes(n_threads, speedup)) + geom_point(aes(n_threads, speedup, fill='500x500'))
+ggplot(data=tab500[2:nrow(tab500),]) + geom_line(aes(n_threads, speedup), color='red') + geom_point(aes(n_threads, speedup, fill='500x500'))
+ggplot(data=tab500[2:nrow(tab500),]) + geom_line(aes(n_threads, speedup), color='red') + geom_point(aes(n_threads, speedup, fill='500x500'), color='red')
+grafico <- ggplot(data=tab500[2:nrow(tab500),]) + geom_line(aes(n_threads, speedup), color='red') + geom_point(aes(n_threads, speedup, fill='500x500'), color='red')
+grafico <- grafico + geom_line(data=tab750, aes(n_threads, speedup), color='blue') + geom_point(data=tab750, aes(n_threads, speedup), color='blue')
+grafico
+grafico <- ggplot(data=tab500[2:nrow(tab500),]) + geom_line(aes(n_threads, speedup), color='red') + geom_point(data=aes(n_threads, speedup, fill='500x500'), color='red')
+grafico <- grafico + geom_line(data=tab750, aes(n_threads, speedup), color='blue') + geom_point(data=tab750, aes(n_threads, speedup, fill='750x750'), color='blue')
+grafico
+grafico + scale_fill_manual(name="Tamanhos", values=c('red', 'blue'))
+grafico <- ggplot() + geom_line(data=tab500, aes(n_threads, speedup), color='red') + geom_point(data=tab500, aes(n_threads, speedup), color='red')
+grafico <- ggplot() + geom_line(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red') + geom_point(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red')
+grafico
+grafico <- ggplot() + geom_line(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red') + geom_point(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red', fill='500x500')
+grafico <- ggplot() + geom_line(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red') + geom_point(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red', fill='500x500') + scale_fill_discrete()
+grafico
+grafico <- ggplot() + geom_line(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red') + geom_point(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red', fill='500x500') + scale_fill_manual(name='Tamanho', values=c('red'))
+grafico
+grafico <- ggplot() + geom_line(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red') + geom_point(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red') + scale_fill_manual(name='Tamanho', values=c('red'))
+grafico
+tab500[2:nrow(tab500),]
+tab500
+tab500[1,3] <- 1.00
+tab500
+grafico <- ggplot() + geom_line(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red') + geom_point(data=tab500[2:nrow(tab500),], aes(n_threads, speedup), color='red')
+grafico
+grafico <- ggplot() + geom_line(data=tab500, aes(n_threads, speedup), color='red') + geom_point(data=tab500, aes(n_threads, speedup), color='red')
+grafico
+grafico <- ggplot() + geom_line(data=tab500, aes(n_threads, speedup), color='red') + geom_point(data=tab500, aes(n_threads, speedup, fill="500x500"), color='red')
+grafico
+grafico + scale_fill_manual(name="Tamanhos")
+grafico + scale_fill_manual(name="Tamanhos", values=c('red'))
+grafico <- grafico + geom_line(data=tab750, aes(n_threads, speedup), color='blue') + geom_point(data=tab750, aes(n_threads, speedup, fill="750x750"), color='blue')
+grafico
+grafico + scale_fill_manual(name="Tamanhos", values=c('red', 'blue'))
+grafico <- ggplot() + geom_line(data=tab500, aes(n_threads, speedup)) + geom_point(data=tab500, aes(n_threads, speedup, fill="500x500"))
+grafico
+grafico <- grafico + geom_line(data=tab750, aes(n_threads, speedup)) + geom_point(data=tab750, aes(n_threads, speedup, fill="750x750"))
+grafico + scale_fill_manual(name="Tamanhos", values=c('red', 'blue'))
+movies_by_year
+ggplot(mtcars, aes('wt', 'mpg')) + \
+    geom_line()
+ggplot(mtcars, aes('wt', 'mpg'))
+head(mtcars)
+ggplot(mtcars, aes('wt', 'mpg')) + geom_line()
+ggplot(mtcars, aes('wt', 'mpg')) + geom_line()
+ggplot(mtcars, aes('wt', 'mpg')) + geom_line() + geom_point()
+str(mtcars)
+geom_line(position = 'jitter')
+ggplot(mtcars, aes('wt', 'mpg', 'qsec')) + geom_line()
+ggplot(mtcars, aes(x='wt', y='mpg', size='qsec')) + geom_line()
+tsla_stock_metrics <- read_csv("https://www.sharpsightlabs.com/datasets/TSLA_start-to-2018-10-26_CLEAN.csv")tsla_stock_metrics <- read_csv("https://www.sharpsightlabs.com/datasets/TSLA_start-to-2018-10-26_CLEAN.csv")
+library(tidyverse)
+tsla_stock_metrics <- read_csv("https://www.sharpsightlabs.com/datasets/TSLA_start-to-2018-10-26_CLEAN.csv")
+arq500 <- read.table("500.dat")
+tab500 <- as.data.frame(arq500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+arq500
+str(arq500)
+arq500 <- read.table("500.dat", stringsAsFactors=F)
+arq750 <- read.table("750.dat", stringsAsFactors=F)
+arq1000 <- read.table("1000.dat", stringsAsFactors=F)
+arq1500 <- read.table("1500.dat", stringsAsFactors=F)
+arq1750 <- read.table("1750.dat", stringsAsFactors=F)
+arq2000 <- read.table("2000.dat", stringsAsFactors=F)
+colnames(arq500) <- c("n_threads", "tempo")
+colnames(arq750) <- c("n_threads", "tempo")
+colnames(arq1000) <- c("n_threads", "tempo")
+colnames(arq1500) <- c("n_threads", "tempo")
+colnames(arq1750) <- c("n_threads", "tempo")
+colnames(arq2000) <- c("n_threads", "tempo")
+tab500 <- as.data.frame(arq500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab750 <- as.data.frame(arq750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1000 <- as.data.frame(arq1000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1500 <- as.data.frame(arq1500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab1750 <- as.data.frame(arq1750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab2000 <- as.data.frame(arq2000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+tab500
+tab500 <- cbind(tab500, speedup=0, tam="m500")
+tab750 <- cbind(tab750, speedup=0, tam="m750")
+tab1000 <- cbind(tab1000, speedup=0, tam="m1000")
+tab1500 <- cbind(tab1500, speedup=0, tam="m1500")
+tab1750 <- cbind(tab1750, speedup=0, tam="m1750")
+tab2000 <- cbind(tab2000, speedup=0, tam="m2000")
+tabelas <- NULL
+tabelas <- rbind(tabelas, tab500, tab750, tab1000, tab1500, tab1750, tab2000)
+tabels
+tabelas
+ggplot() + geom_line(data=tabelas, aes(n_threads, speedup))
+tab500
+tab500$speedup <- round((tab500$media / tab500$media[1]) * 10, digits=2)
+tab750$speedup <- round((tab750$media / tab750$media[1]) * 10, digits=2)
+tab1000$speedup <- round((tab1000$media / tab1000$media[1]) * 10, digits=2)
+tab1500$speedup <- round((tab1500$media / tab1500$media[1]) * 10, digits=2)
+tab1750$speedup <- round((tab1750$media / tab1750$media[1]) * 10, digits=2)
+tab2000$speedup <- round((tab2000$media / tab2000$media[1]) * 10, digits=2)
+tab500[1,3] <- 1.00
+tab750[1,3] <- 1.00
+tab1000[1,3] <- 1.00
+tab1500[1,3] <- 1.00
+tab1750[1,3] <- 1.00
+tab2000[1,3] <- 1.00
+tabelas <- NULL
+tabelas <- rbind(tabelas, tab500, tab750, tab1000, tab1500, tab1750, tab2000)
+tabelas
+ggplot() + geom_line(data=tabelas, aes(n_threads, speedup))
+tabelas[order(nthreads),]
+tabelas[order(n_threads),]
+tabelas[order(tabelas$n_threads),]
+tabelas <- tabelas[order(tabelas$n_threads),]
+tabelas
+ggplot() + geom_line(data=tabelas, aes(n_threads, speedup))
+ggplot() + geom_line(data=tab500, aes(n_threads, speedup, fill="500x500")) + geom_line(data=tab750, aes(n_threads, speedup, fill="750x750"))
+ggplot() + geom_line(data=tabelas, aes(n_threads, speedup, fill=tam))
+str(tabelas)
+ggplot() + geom_line(data=tabelas, aes(n_threads, speedup, fill=tam))
+ggplot(tabelas) + geom_line(aes(n_threads, speedup, fill=tam))
+ggplot(tabelas) + geom_line(aes(n_threads, speedup, fill=as.character(tam)))
+ggplot(tabelas) + geom_area(aes(n_threads, speedup, fill=as.character(tam)))
+ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=as.character(tam)))
+ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam))
+ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam))
+ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point()
+ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam))
+ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes")
+ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes")
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes")
+library(ggplotly)
+library(plotly)
+ggplotly(grafico)
+tab500
+tabIdeal <- data.frame(n_threads=[1,2,3,4,6,8], speedup=[1,2,3,4,6,8], tam="Ideal")
+[1,2,3,4,6,8]
+{1,2,3,4,6,8}
+(1,2,3,4,6,8)
+(1;2;3;4;6;8)
+tabIdeal <- data.frame(n_threads=c(1,2,3,4,6,8), speedup=c(1,2,3,4,6,8), tam="Ideal")
+tabIdeal
+tabelas <- rbind(tabelas, tabIdeal)
+tabIdeal <- data.frame(n_threads=c(1,2,3,4,6,8), media=0, speedup=c(1,2,3,4,6,8), tam="Ideal")
+tabelas <- rbind(tabelas, tabIdeal)
+tabelas <- tabelas[order(tabelas$n_threads),]
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes")
+grafico
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes", labels=c("500x500", "750x750", "1000x1000", "1250x1250", "1500x1500", "1750x1750", "2000x2000"))
+grafico
+head(tabelas)
+head(tabelas, n=10)
+savehistory("manha_10-08-19")

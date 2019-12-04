@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "cstring": "cpp",
+        "iostream": "cpp",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "utility": "c"
+    }
+}

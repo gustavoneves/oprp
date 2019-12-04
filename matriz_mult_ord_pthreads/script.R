@@ -1,0 +1,110 @@
+library("dplyr")
+library("ggplot2")
+library("plotly")
+
+arq500 <- read.table("500.dat", stringsAsFactors=F)
+
+arq750 <- read.table("750.dat", stringsAsFactors=F)
+
+arq1000 <- read.table("1000.dat", stringsAsFactors=F)
+
+arq1250 <- read.table("1250.dat", stringsAsFactors=F)
+
+arq1500 <- read.table("1500.dat", stringsAsFactors=F)
+
+arq1750 <- read.table("1750.dat", stringsAsFactors=F)
+
+arq2000 <- read.table("2000.dat", stringsAsFactors=F)
+
+arq4000 <- read.table("4000.dat", stringsAsFactors=F)
+
+colnames(arq500) <- c("n_threads", "tempo")
+
+colnames(arq750) <- c("n_threads", "tempo")
+
+colnames(arq1000) <- c("n_threads", "tempo")
+
+colnames(arq1250) <- c("n_threads", "tempo")
+
+colnames(arq1500) <- c("n_threads", "tempo")
+
+colnames(arq1750) <- c("n_threads", "tempo")
+
+colnames(arq2000) <- c("n_threads", "tempo")
+
+colnames(arq4000) <- c("n_threads", "tempo")
+
+tab500 <- as.data.frame(arq500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+
+tab750 <- as.data.frame(arq750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+
+tab1000 <- as.data.frame(arq1000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+
+tab1250 <- as.data.frame(arq1250 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+
+tab1500 <- as.data.frame(arq1500 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+
+tab1750 <- as.data.frame(arq1750 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+
+tab2000 <- as.data.frame(arq2000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+
+tab4000 <- as.data.frame(arq4000 %>% group_by(n_threads) %>% summarize(media=mean(tempo)))
+
+
+tab500 <- cbind(tab500, speedup=0, tam="500x500")
+
+tab750 <- cbind(tab750, speedup=0, tam="750x750")
+
+tab1000 <- cbind(tab1000, speedup=0, tam="1000x1000")
+
+tab1250 <- cbind(tab1250, speedup=0, tam="1250x1250")
+
+tab1500 <- cbind(tab1500, speedup=0, tam="1500x1500")
+
+tab1750 <- cbind(tab1750, speedup=0, tam="1750x1750")
+
+tab2000 <- cbind(tab2000, speedup=0, tam="2000x2000")
+
+tab4000 <- cbind(tab4000, speedup=0, tam="4000x4000")
+
+
+tab500$speedup <- round((tab500$media[1] / tab500$media), digits=2)
+
+tab750$speedup <- round((tab750$media[1] / tab750$media), digits=2)
+
+tab1000$speedup <- round((tab1000$media[1] / tab1000$media), digits=2)
+
+tab1250$speedup <- round((tab1250$media[1] / tab1250$media), digits=2)
+
+tab1500$speedup <- round((tab1500$media[1] / tab1500$media), digits=2)
+
+tab1750$speedup <- round((tab1750$media[1] / tab1750$media), digits=2)
+
+tab2000$speedup <- round((tab2000$media[1] / tab2000$media), digits=2)
+
+tab4000$speedup <- round((tab4000$media[1] / tab4000$media), digits=2)
+
+#tab500[1,3] <- 1.00
+
+#tab750[1,3] <- 1.00
+
+#tab1000[1,3] <- 1.00
+
+#tab1500[1,3] <- 1.00
+
+#tab1750[1,3] <- 1.00
+
+#tab2000[1,3] <- 1.00
+
+
+tabelas <- data.frame(n_threads=c(1,2,4,8), media=0, speedup=c(1,2,4,8), tam="Ideal")
+
+tabelas <- rbind(tabelas, tab500, tab750, tab1000, tab1250, tab1500, tab1750, tab2000, tab4000)
+
+grafico <- ggplot(tabelas) + geom_line(aes(n_threads, speedup, group=tam, color=tam)) + geom_point(aes(n_threads, speedup, group=tam, color=tam)) + scale_fill_discrete(name="Tamanhos das Matrizes", labels=c("500x500", "750x750", "1000x1000", "1250x1250", "1500x1500", "1750x1750", "2000x2000", "4000x4000")) + ggtitle("Multiplicação de Matrizes - Ariel; Gustavo Neves") + theme(panel.grid.major=element_line(colour="black", linetype="dashed"), panel.grid.minor=element_line(colour="black", linetype="dashed"))
+
+pdf(file="graficoOPRP.pdf", paper='A4r')
+
+plot(grafico)
+
+dev.off()

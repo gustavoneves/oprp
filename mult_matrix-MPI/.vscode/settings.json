@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "valarray": "c",
+        "chrono": "c",
+        "cmath": "c"
+    }
+}
